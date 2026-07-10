@@ -2,17 +2,17 @@
 
 > **Project:** 知命 AI 人生档案顾问（ZhiMing AI — Life Archive Consultant）
 >
-> **Audit Date:** 2026-07-09
+> **Audit Date:** 2026-07-10
 >
 > **Auditor:** Audit Agent — Claude Code (DeepSeek V4 Flash)
 >
-> **Agent ID:** Agent-20260709-01
+> **Agent ID:** Agent-20260710-01
 >
 > **审计角色:** Audit Agent (per docs/17 §5)
 >
-> **Document Version:** v1.0
+> **Document Version:** v1.1
 >
-> **Document Status:** ✅ Completed
+> **Document Status:** ✅ Revised (Final)
 >
 > **审计类型:** Phase 2 Final Architecture Audit（独立复审 — 对 docs/15 P0 修复的二次确认审计）
 
@@ -57,18 +57,19 @@
 以下说明 docs/15 与 docs/18 之间的关系，二者不存在冲突，而是时间演进关系：
 
 ```
-2026-07-08    2026-07-08        2026-07-09            2026-07-09（本次）
-    │              │                  │                      │
-    ▼              ▼                  ▼                      ▼
- docs/15      docs/18 创建      P0 修复执行          docs/16b Final Audit
- 第一次        风险跟踪表         Architect Agent      独立复审验证
- 架构审计      导入 docs/15      关闭 6 项 P0          确认修复有效
- (发现)       + docs/16 风险     → Resolved            → Verified
+2026-07-08    2026-07-08        2026-07-09          2026-07-09（v1.0）      2026-07-10（v1.1）
+    │              │                  │                      │                      │
+    ▼              ▼                  ▼                      ▼                      ▼
+ docs/15      docs/18 创建      P0 修复执行          docs/16b Final Audit    docs/16b Final Revision
+ 第一次        风险跟踪表         Architect Agent      独立复审验证            措辞修正 + 一致性确认
+ 架构审计      导入 docs/15      关闭 6 项 P0          确认修复有效            Phase 3 Decision 收紧
+ (发现)       + docs/16 风险     → Resolved            → Verified               Drift/Risk 明确分离
 ```
 
 - **docs/15** = 第一次完整架构审计，发现时快照（6P0 + 7P1 + 3P2），结论 Conditional (56/100)
 - **docs/18** = 风险跟踪表，docs/15 的后续执行工具，维护 P0 修复的实时状态
-- **docs/16b（本文档）** = Final Audit，对 P0 修复结果的独立确认，完成 Resolved → Verified
+- **docs/16b（v1.0）** = Final Audit，对 P0 修复结果的独立确认，完成 Resolved → Verified
+- **docs/16b（v1.1 — 本文档）** = Final Revision，在 v1.0 基础上进行措辞修正：Phase 3 Decision 收紧、Drift/Risk Workflow 明确分离、Architecture Freeze 编号说明、最终一致性确认
 
 ### 1.4 项目治理入口说明
 
@@ -135,7 +136,7 @@
 
 | 声明项 | 内容 |
 |--------|------|
-| **Agent ID** | Agent-20260709-01 |
+| **Agent ID** | Agent-20260710-01 |
 | **治理角色** | Audit Agent（per docs/17 §5） |
 | **功能角色** | 评审者（per docs/12 §2.1） |
 | **权限范围** | W(审计报告) — 仅创建 docs/16b + 追加 docs/11；被审计对象全部 R 权限（per docs/17 §8.2） |
@@ -377,7 +378,7 @@
 | **定义** | 按 docs/18 §7 风险关闭流程推导：当全部 P0 达到 Closed 后，架构基线进入冻结态（Architecture Baseline Frozen） |
 | **必要条件** | 6 项 P0 Closed + ADR-020 Approved + 产品负责人确认 |
 | **当前差距** | 6 项 P0 为 Verified（本次审计），0 项 Closed；ADR-020 为 Draft |
-| **建议** | Architecture Freeze 正式声明建议作为独立文档维护（推荐编号 docs/20），用于记录冻结时的架构基线快照、已生效的 ADR 清单和冻结范围边界 |
+| **建议** | Architecture Freeze 正式声明建议作为独立文档维护（推荐编号 docs/20，不强制写死），用于记录冻结时的架构基线快照、已生效的 ADR 清单和冻结范围边界 |
 
 ### 7.6 Phase 3 Decision
 
@@ -394,7 +395,7 @@
 > | docs/18 §7.2 P0 验证标准 | P0 需独立快速确认审计，Audit Agent ≠ 修复者 | ✅ 本次满足 |
 > | docs/01 项目宪章 §4.2 | Phase 3 前置：6 个 P0 关闭 + ADR-020 批准 | ❌ 均未达到 |
 >
-> **Legal conclusion：** All 6 P0 issues have been verified as Resolved in source files. The architecture baseline is technically stable enough for Phase 3 — but governance gates require Closed status before entry. The remaining step is a process formality, not a technical gap.
+> **Legal conclusion：** 6 项 P0 已在源文件中验证修复。但当前仍属于 Phase 2 收尾阶段，Architecture Freeze 完成之前，不建议进入 Phase 3 代码开发。Governance gates（6 P0 Closed + ADR-020 Approved + Architecture Freeze）是阻断条件，必须全部满足后方可进入 Phase 3。
 
 ### 7.7 Approval Required
 
@@ -426,7 +427,7 @@
 | 5 | ADR-014~019 逐条确认状态（批准/降级/保留 Draft） | ARC-16-P1-006 | 1-2 次评审 |
 | 6 | docs/12 §3.3.4 交接标准由"建议"→"强制" | ARC-16-P1-003 | 1 处文字修改 |
 | 7 | docs/09 docs/10 处理方案决策（删除/填充/保留占位） | ARC-16-P1-004 | 1 次决策 |
-| 8 | Architecture Freeze 正式声明文档化（推荐编号 docs/20） | — | 1 份轻量文档 |
+| 8 | Architecture Freeze 正式声明文档化（推荐编号 docs/20，不强制写死） | — | 1 份轻量文档 |
 | 9 | 文档状态变更流程补充（docs/12 §5.1） | ARC-16-P1-005 | 1 处规范补充 |
 
 ### 8.3 Long-term（Phase 3 初期可并行）
