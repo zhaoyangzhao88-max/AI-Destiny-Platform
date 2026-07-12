@@ -1,0 +1,62 @@
+[build-system]
+# Setuptools-based build: PEP 517 compliant.
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# zhì mìng — 知命 AI 人生档案顾问
+name = "zhiming"
+version = "0.1.0"
+description = "ZhiMing AI — Life Archive Consultant Core Service"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+
+# Core runtime dependencies — kept minimal for Phase 3.1 bootstrap.
+# Additional deps will be added per Epic as development progresses.
+dependencies = [
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.29.0",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.2.0",
+    "structlog>=24.1.0",
+]
+
+[project.optional-dependencies]
+# Development tooling
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4.0",
+    "mypy>=1.9",
+]
+# Database — E-DB Epic (Phase 3.1)
+db = [
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+]
+# AI / LLM provider — E-AI Epic (Phase 3.3)
+ai = [
+    "httpx>=0.27",
+    "websockets>=12.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["zhiming*"]
+
+# ---- Ruff (linter + formatter) ----
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+ignore = [
+    # Allow empty __init__.py (module docstrings are sufficient)
+    "F401",
+]
+
+# ---- Pytest ----
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
