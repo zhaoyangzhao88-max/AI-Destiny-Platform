@@ -210,7 +210,7 @@ ws://127.0.0.1:8000/ws/v1/session?token=eyJhbGciOiJIUzI1NiIs...
 - 客户端每 30 秒发送 `heartbeat.ping`
 - 服务端收到后回复 `heartbeat.pong`
 - 服务端 90 秒未收到任何消息（含 ping）则判定客户端断开
-- 客户端 30 秒未收到 pong 则判定服务端不可用，触发重连
+- 客户端 60 秒未收到 pong 则判定服务端不可用，触发重连（pong 超时 = 2× ping 间隔，预留网络抖动缓冲，见 §3.3）
 
 **⑥ disconnect：**
 
@@ -223,7 +223,7 @@ ws://127.0.0.1:8000/ws/v1/session?token=eyJhbGciOiJIUzI1NiIs...
 | 参数 | 值 | 说明 |
 |------|-----|------|
 | ping 间隔 | 30s | 客户端发送 `heartbeat.ping` 的周期 |
-| pong 超时 | 30s | 客户端等待 `heartbeat.pong` 的超时时间 |
+| pong 超时 | 60s | 客户端等待 `heartbeat.pong` 的超时时间（= 2× ping 间隔，预留网络抖动缓冲，避免误断连） |
 | 连接空闲超时 | 90s | 服务端关闭无活动连接的阈值 |
 | 重连初始间隔 | 1s | 第一次重连等待时间 |
 | 重连最大间隔 | 30s | 指数退避上限 |

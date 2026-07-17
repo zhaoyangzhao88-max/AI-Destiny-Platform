@@ -322,7 +322,7 @@ AI 动态追问
 |------|------|
 | **决策编号** | ADR-014 |
 | **决策日期** | 2026-07-08 |
-| **状态** | ✅ Draft |
+| **状态** | ✅ Accepted Concept |
 | **决策者** | 产品负责人 |
 
 **Context（背景）：**
@@ -363,7 +363,7 @@ V1 采用 **"本地优先 + 云端扩展"** 混合架构：
 |------|------|
 | **决策编号** | ADR-015 |
 | **决策日期** | 2026-07-08 |
-| **状态** | ✅ Draft |
+| **状态** | ✅ Accepted Concept |
 | **决策者** | 产品负责人 |
 
 **Context（背景）：**
@@ -402,7 +402,7 @@ V1 阶段优先开发 **Windows APP**，未来根据市场反馈逐步扩展：
 |------|------|
 | **决策编号** | ADR-016 |
 | **决策日期** | 2026-07-08 |
-| **状态** | ✅ Draft |
+| **状态** | ✅ Accepted Concept |
 | **决策者** | 产品负责人 |
 
 **Context（背景）：**
@@ -454,7 +454,7 @@ V1 架构：
 |------|------|
 | **决策编号** | ADR-017 |
 | **决策日期** | 2026-07-08 |
-| **状态** | ✅ Draft |
+| **状态** | ✅ Accepted Concept |
 | **决策者** | 产品负责人 |
 
 **Context（背景）：**
@@ -542,7 +542,7 @@ V1 采用 **Windows APP（表示层）+ Python 核心服务（本地）** 分层
 |------|------|
 | **决策编号** | ADR-018 |
 | **决策日期** | 2026-07-08 |
-| **状态** | ✅ Draft |
+| **状态** | ✅ Accepted Concept |
 | **决策者** | 产品负责人 |
 
 **Context（背景）：**
@@ -610,7 +610,7 @@ Python 核心服务
 |------|------|
 | **决策编号** | ADR-019 |
 | **决策日期** | 2026-07-08 |
-| **状态** | ✅ Draft |
+| **状态** | ✅ Accepted Concept |
 | **决策者** | 产品负责人 |
 
 **Context（背景）：**
@@ -705,7 +705,7 @@ V1 采用 **HTTP API + WebSocket 双通道通信架构**。
 |------|------|
 | **决策编号** | ADR-020 |
 | **决策日期** | 2026-07-08 |
-| **状态** | ✅ Draft |
+| **状态** | ✅ Approved（经产品负责人 2026-07-10 批准，详见 20_ProductOwner_Approval.md） |
 | **决策者** | 产品负责人 |
 | **关联风险** | docs/18 ARC-15-P0-001 |
 
@@ -785,10 +785,10 @@ V1（桌面首发）
 | ADR-011 | 出生时间允许未知 | 2026-07-08 | ✅ Approved |
 | ADR-012 | 数据三层体系：事实/推测/待验证 | 2026-07-08 | ✅ Approved |
 | ADR-013 | 用户资料版本历史机制 | 2026-07-08 | ✅ Accepted Concept |
-| ADR-014 | 混合架构——本地优先 + 云端扩展 | 2026-07-08 | ✅ Draft |
-| ADR-015 | Windows APP 优先，未来 Web 和移动端扩展 | 2026-07-08 | ✅ Draft |
-| ADR-016 | 单核心知命 AI Agent，未来支持多 Agent 演进 | 2026-07-08 | ✅ Draft |
-| ADR-017 | 核心业务服务与客户端解耦——APP + Python 核心服务架构 | 2026-07-08 | ✅ Draft |
-| ADR-018 | V1 Windows APP 技术架构选择——PySide6 + Vue 渐进式混合架构 | 2026-07-08 | ✅ Draft |
-| ADR-019 | 客户端与核心服务通信协议设计——HTTP API + WebSocket 双通道架构 | 2026-07-08 | ✅ Draft |
-| ADR-020 | V1 PySide6 与 Vue 集成方案——QWebEngineView 嵌入式（WebChannel 宿主集成 + HTTP/WS 业务通信） | 2026-07-08 | ✅ Draft |
+| ADR-014 | 混合架构——本地优先 + 云端扩展 | 2026-07-08 | ✅ Accepted Concept |
+| ADR-015 | Windows APP 优先，未来 Web 和移动端扩展 | 2026-07-08 | ✅ Accepted Concept |
+| ADR-016 | 单核心知命 AI Agent，未来支持多 Agent 演进 | 2026-07-08 | ✅ Accepted Concept |
+| ADR-017 | 核心业务服务与客户端解耦——APP + Python 核心服务架构 | 2026-07-08 | ✅ Accepted Concept |
+| ADR-018 | V1 Windows APP 技术架构选择——PySide6 + Vue 渐进式混合架构 | 2026-07-08 | ✅ Accepted Concept |
+| ADR-019 | 客户端与核心服务通信协议设计——HTTP API + WebSocket 双通道架构 | 2026-07-08 | ✅ Accepted Concept |
+| ADR-020 | V1 PySide6 与 Vue 集成方案——QWebEngineView 嵌入式（WebChannel 宿主集成 + HTTP/WS 业务通信） | 2026-07-08 | ✅ Approved（经产品负责人 2026-07-10 批准，详见 20_ProductOwner_Approval.md） |

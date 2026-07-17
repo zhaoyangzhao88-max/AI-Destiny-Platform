@@ -1,0 +1,10 @@
+# --- Secrets / API keys (never commit) ---
+.env
+.env.local
+
+# --- Local tooling session cache (never commit) ---
+.zcode/
+
+# --- Python cache / build artifacts (never commit) ---
+__pycache__/
+*.pyc

@@ -28,6 +28,11 @@
 | P1 | `docs/13_API接口契约设计.md` | HTTP + WebSocket API 接口契约 |
 | P1 | `docs/14_WebSocket实时通信协议设计.md` | WebSocket 实时通信协议设计 |
 
+> 📌 **本清单为必读文档的唯一权威版本（SSOT）。其他文档中的引用清单（如 HANDOVER.md §6.1/§7、12_规范 §3.1/§5.1/Appendix B）请以本表为准。**
+> 如需修改（新增/移除文档），需同步更新 HANDOVER.md §6.1、§7 以及 `docs/12_AI协作开发规范.md` §3.1、§5.1、Appendix B 的引用。
+
+> ℹ️ **章节号变动说明：** 历史文件（sprint 报告、risk-resolutions 存档等）中引用的章节号可能因后续文档修订而与当前版本不符，一切以最新版对应文档为准。
+
 ## Plan 模式要求
 
 1. **必须先读文档再 Plan** — 进入 Plan 模式前至少阅读 P0 文档
