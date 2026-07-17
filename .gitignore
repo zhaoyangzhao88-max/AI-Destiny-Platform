@@ -1,10 +1,51 @@
-# --- Secrets / API keys (never commit) ---
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.egg-info/
+
+# ---- Virtual Environments ----
 .env
 .env.local
+.env.*
+venv/
+.venv/
+env/
+virtualenv/
 
-# --- Local tooling session cache (never commit) ---
+# ---- IDE / Editor ----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ---- Project-specific ----
+data/
+*.db
+*.sqlite3
+logs/
+htmlcov/
+.coverage
+.coverage.*
+coverage/
+.coverage*
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Local tooling session cache (never commit) ----
 .zcode/
-
-# --- Python cache / build artifacts (never commit) ---
-__pycache__/
-*.pyc
