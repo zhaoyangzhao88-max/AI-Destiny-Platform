@@ -18,7 +18,7 @@
 
 ## 2. 改动 diff
 
-> 说明：`src/` 在 git 中整体为 **untracked**（`?? src/`），`git diff` 无 baseline，故下方为相对改动前已读取内容的行级 diff。
+> 说明：`src/` 现已纳入版本管理（`e00036a` 提交已包含本 Sprint 改动），下方为相对改动前已读取内容的行级 diff（仅能力声明字段拆分，计算逻辑未动）。
 
 ### 2.1 `src/core/domain/interfaces/bazi_engine.py` — ABC `engine_info` 文档字符串字段清单
 
@@ -116,7 +116,7 @@ src/core/__init__.py
 ### 5.2 是否发现新问题
 1. **🟢 顺带修复一处历史格式瑕疵：** Sprint 36 替换时漏掉 `engine.py:63` 的 12 个前导空格，本 Sprint 补两行新字段时一并恢复了标准缩进，dict 格式恢复一致（不影响运行，仅可读性）。
 2. **⚪ 语义澄清价值：** 拆分后 `handles_mean_solar_time=True` 精确表达「仅做了经度差修正的平太阳时」，与 Sprint 36 交叉验证中外部资料确认的事实（−2h10m 是平太阳时经度部分，完整真太阳时需叠日均时差）一致；`handles_equation_of_time=False` 为后续补均时差表预留明确接口位。能力声明现在与实现真实状态一一对应。
-3. **⚪ `src/` 仍整体 untracked：** `git diff` 无 baseline，本报告以行级 diff 记录；建议后续将 `src/` 纳入版本管理（需用户确认）。
+3. **🟢 `src/` 已纳入版本管理：** 提交 `e00036a` 已包含本 Sprint 改动，`git status` 当前干净，本报告的行级 diff 为相对改动前内容的记录。
 4. **⚪ 不涉及任何已确认 ADR：** 纯能力声明字段重命名，未触碰 ADR-001~016 红线。
 
 ---

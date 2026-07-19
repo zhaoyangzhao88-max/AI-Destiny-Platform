@@ -1,6 +1,6 @@
 # 22 — Phase 3 Development Plan（开发执行计划）
 
-> **版本:** v3.0 | **日期:** 2026-07-11 | **状态:** ✅ Approved
+> **版本:** v3.1 | **日期:** 2026-07-18 | **状态:** ✅ Approved
 >
 > **角色:** Documentation Engineer — 基于 Project Architect v2.0 重构，新增 Iteration/Workflow/Change Mgmt/Review Checklist
 >
@@ -54,6 +54,39 @@
 | ADR-020 | PySide6 + Vue（QWebEngineView 嵌入式）|
 
 Draft ADR（014~019）仅作方向参考，不作为约束性依据。
+
+### 2.3 Draft ADR 处理原则
+
+ADR-014~019 为 Draft 状态，**不可作为约束性设计依据**，但可作为方向参考。如开发过程中发现需要确认这些 Draft ADR 的内容，应：
+
+1. 标记为 `⚠️ [设计依赖 Draft ADR-0XX]`
+2. 在产品负责人确认其状态前，优先使用 Approved ADR 的方案兼容方向
+3. 如需完整实现，先请求 Product Owner 确认该 ADR 状态
+
+### 2.4 逐 Epic ADR 映射（源自 e00036a v1.0，保留作治理参考）
+
+> 下表为合并前 LOCAL（e00036a v1.0）的 18-Epic 分解与 ADR 关联，与 §5.3 当前 v3.0 的 Epic 总表（命名 / 集合不同）并存，仅供治理追溯参考，不作为约束。
+
+| 编号 | Epic | 缩写 | 子阶段 | 工作量估 | 依赖 | 相关 ADR |
+|------|------|------|--------|---------|------|---------|
+| 1 | 项目启动 & 骨架搭建 | E-BOOT | 3.1 | 小 | — | — |
+| 2 | 核心基础设施 | E-INFRA | 3.1 | 中 | E-BOOT | ADR-017, ADR-019 |
+| 3 | 数据库 & 迁移 | E-DB | 3.1 | 中 | E-INFRA | ADR-012, ADR-013, ADR-014 |
+| 4 | 仓储层 | E-REPO | 3.1 | 中 | E-DB | ADR-012 |
+| 5 | 认证 & 用户模块 | E-AUTH | 3.1 | 中 | E-REPO (UserRepo) | ADR-002 |
+| 6 | 任务引擎 | E-TASK | 3.1 | 中 | E-INFRA | ADR-009 |
+| 7 | HTTP API 路由层 | E-API | 3.1→3.2 | 大 | E-REPO, E-AUTH, E-TASK | ADR-019 |
+| 8 | WebSocket 协议层 | E-WS | 3.2 | 大 | E-TASK, E-INFRA | ADR-019 |
+| 9 | BaZi 排盘引擎 | E-BAZI | 3.2 | 大 | E-DB | ADR-009, ADR-011 |
+| 10 | AI 引擎（LLM 网关） | E-AI | 3.2 | 大 | E-INFRA, E-PROMPT | ADR-016 |
+| 11 | Prompt 引擎 | E-PROMPT | 3.2 | 中 | — | ADR-016 |
+| 12 | 记忆引擎 | E-MEMORY | 3.2 | 大 | E-DB, E-REPO, E-AI | ADR-012, ADR-016, docs/19 |
+| 13 | 知识库引擎 | E-KNOW | 3.2 | 小 | E-DB, E-REPO | — |
+| 14 | 报告引擎 | E-REPORT | 3.2 | 中 | E-REPO, E-AI | ADR-009 |
+| 15 | GUI 外壳（PySide6） | E-GUI-SHELL | 3.3 | 中 | E-INFRA | ADR-018, ADR-020 |
+| 16 | GUI 前端（Vue） | E-GUI-VUE | 3.3 | 大 | E-API, E-WS, E-AUTH | ADR-018, ADR-020 |
+| 17 | 测试套件 | E-TEST | 3.3 | 大 | 全部 Epic | — |
+| 18 | 打包 & 部署 | E-PKG | 3.3 | 中 | E-GUI-SHELL, E-GUI-VUE | ADR-015 |
 
 ---
 
@@ -531,7 +564,7 @@ Chain 4: GUI + VUE（可并行）→ PKG
 
 | ID | 描述 | 等级 | 关联 Epic |
 |----|------|:----:|:---------:|
-| ARC-15-P1-001 | 技术选型表冲突 | P1 | E-BOOT |
+| ARC-15-P1-001 | 技术选型表中 8 项 undefined（ADR-014~019 逐条技术确认未完成） | P1 | E-BOOT |
 | ARC-15-P1-002 | HANDOVER 遗漏 ADR 列表 | P1 | E-BOOT |
 | ARC-15-P1-003 | 版本历史存储方案未决 | P1 | E-DB |
 | ARC-15-P1-004 | 离线策略颗粒度不足 | P1 | E-SVC |
@@ -586,8 +619,10 @@ Chain 4: GUI + VUE（可并行）→ PKG
 
 ---
 
-> **版本：** v3.0 | **2026-07-11** | **角色：** Documentation Engineer
+> **版本：** v3.1 | **2026-07-18** | **角色：** Documentation Engineer
 >
 > **修改摘要：** 新增 Iteration 层、Development Workflow、Change Management、Review Checklist（3 级）、Architecture Review Gate
 >
-> **冻结一致性：** 未修改任何冻结基线内容（docs/08/13/14/19/21/04 均未触碰）
+> **修改摘要（Sprint 41）：** 增量合并 LOCAL（e00036a v1.0）治理版内容——补回 §2.3 Draft ADR 处理原则、新增 §2.4 逐 Epic ADR 映射（源自 v1.0，与 §5.3 并存作追溯参考）、将 ARC-15-P1-001 风险描述精确化为「技术选型表中 8 项 undefined（ADR-014~019 逐条技术确认未完成）」。未删除任何 v3.0 已有内容。
+>
+> **冻结一致性：** 未修改任何冻结基线内容（docs/08/13/14/19/21/04 均未触碰；本次仅对 docs/22 内部结构做增量插入与单元格精确化）
