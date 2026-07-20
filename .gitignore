@@ -18,6 +18,9 @@ venv/
 .venv/
 env/
 virtualenv/
+# ---- Temporary test venvs (never commit, prevent accidental staging) ----
+venv_*_test/
+venv_*_notz/
 
 # ---- IDE / Editor ----
 .vscode/

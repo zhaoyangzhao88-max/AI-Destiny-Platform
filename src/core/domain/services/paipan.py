@@ -14,6 +14,7 @@ from zoneinfo import ZoneInfo
 
 from lunar_python import Solar
 
+from core.domain.exceptions import EngineCalculationError
 from core.domain.models.bazi_chart import BaZiRequest, BaZiResult, Pillar
 from core.infrastructure.bazi.constants import HIDDEN_STEMS_MAP
 
@@ -42,9 +43,15 @@ def _true_solar_correction_minutes(request: BaZiRequest) -> float:
         std_offset_hours = (
             tz.utcoffset(dt) - tz.dst(dt)
         ).total_seconds() / 3600.0
-    except Exception:
-        # 时区解析失败：退化为 0 修正，避免崩溃（合法 timezone 不应触发）
-        std_offset_hours = 0.0
+    except Exception as exc:
+        # Sprint 48 fail-fast：不再静默退化为 0 修正
+        # （0 修正会产出看似合理但错误的真太阳时，掩盖依赖缺失）
+        raise EngineCalculationError(
+            f"时区解析失败: timezone='{request.timezone}'。"
+            f"无法获取标准时区偏移，真太阳时校准无法继续。"
+            f"常见原因：tzdata 时区数据库未安装（pip install tzdata），"
+            f"或 timezone 字符串非法。原始错误: {exc}"
+        ) from exc
     standard_meridian = std_offset_hours * 15.0
     return (request.longitude - standard_meridian) * 4.0
 

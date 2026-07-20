@@ -20,6 +20,7 @@ _SRC_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.p
 if _SRC_ROOT not in sys.path:
     sys.path.insert(0, _SRC_ROOT)
 
+from core.domain.exceptions import EngineCalculationError  # noqa: E402
 from core.domain.interfaces.bazi_engine import BaziEngine  # noqa: E402
 from core.domain.models.bazi_chart import BaZiRequest, BaZiResult  # noqa: E402
 from core.domain.services.paipan import calculate_bazi  # noqa: E402
@@ -266,6 +267,26 @@ class LunarBaziEngine(BaziEngine):
             )
         else:
             print(f"PASS 乌鲁木齐13:00 真太阳时时柱(巳时翻转): {uq5_t}")
+
+        # ── 测试 7: 非法 timezone 应显式报错（fail-fast, Sprint 48） ──
+        # 传入不存在的时区字符串，验证不再静默返回错误结果，
+        # 而是抛出 EngineCalculationError。
+        try:
+            engine.paipan(_req(1990, 8, 15, 12, 0, timezone="Not/A_Real_Zone"))
+            # 若未抛异常，说明仍在静默返回错误结果
+            failures.append(
+                "FAIL 非法 timezone 未显式报错（仍静默返回错误结果，违反 fail-fast 原则）"
+            )
+        except EngineCalculationError as exc:
+            print(
+                f"PASS 非法 timezone 显式报错: timezone='Not/A_Real_Zone' "
+                f"-> {type(exc).__name__}: {exc}"
+            )
+        except Exception as exc:
+            failures.append(
+                f"FAIL 非法 timezone 抛出了非预期异常类型: "
+                f"{type(exc).__name__}: {exc}"
+            )
 
         # ── 汇总 ──
         if not failures:
